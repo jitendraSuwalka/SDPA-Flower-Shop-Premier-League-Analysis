@@ -180,7 +180,7 @@ def main():
          #   print(f"{' '*8}{k.capitalize()}: {v:.1f}")
         #print()
 
-        # Restock
+        # Restock for greenhouse
         print("The greenhouse has spare capacity and needs to be restocked...\n")
         if yes_no("Do you want to replenish your stock? (y/n): ") == "y":
             chosen = {}
