@@ -232,7 +232,7 @@ def main():
         #for name, rev in revenue_by_florist.items():
          #   print(f"      {name}: £{rev:.2f}")
 
-        # Show bouquet production per florist
+        # Show bouquet production perfor each florist
         print("\nBouquets Made By Each Florist:")
         print("-" * 30)
 
