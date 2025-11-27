@@ -67,7 +67,7 @@ def hire_interactive(existing_staff):
                 maximum=slots,
             )
 
-    # ✅ NEW: Track existing names (case-insensitive)
+    # NEW: Track existing names (case-insensitive)
     existing_names = {f.name.lower() for f in existing_staff}
     new_names = set()
 
