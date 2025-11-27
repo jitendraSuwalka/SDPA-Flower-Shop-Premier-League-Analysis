@@ -74,7 +74,7 @@ def hire_interactive(existing_staff):
     new = []
     for _ in range(to_hire):
 
-        # ✅ NEW: Prevent duplicate names (case-insensitive)
+        # Prevent duplicate florist names (case-insensitive)
         while True:
             name = safe_name("Please input florist name (one at a time): ")
             name_key = name.lower()
