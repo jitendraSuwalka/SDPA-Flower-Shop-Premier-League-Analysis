@@ -120,7 +120,7 @@ def main():
         income, revenue_by_florist, bouquets_by_florist, unmet = \
             shop.run_month_production(orders)
 
-
+         # Improve formatting and alignment of End of month calculations
         print("\nEnd of month calculations:\n")
 
         print(f"{' ' * 2}{'Cash Balance, Month Start':<28}: £{shop.cash_balance:.2f}")
