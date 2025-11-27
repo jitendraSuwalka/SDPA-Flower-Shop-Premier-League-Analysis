@@ -220,7 +220,7 @@ def main():
 
         shop.cash_balance += income - employee_cost - greenhouse_cost - rent - restock_cost
         
-        # Show florist revenue contribution this month
+        # Show florist revenue contribution for this month
         print("\nFlorist Revenue Contribution This Month:")
         print("-" * 40)
 
