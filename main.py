@@ -77,41 +77,8 @@ def main():
         if not ok:
             print("This exceeds the available supplies. You must try again.")
             orders = collect_orders(FlowerShop.BOUQUET_TYPES, max_vals)
-        #print("\n" + "=" * 50)
-        #print("END OF MONTH SUMMARY".center(50))
-        #print("=" * 50)
         
-        # Speciality & labour engine
-        #income, revenue_by_florist, bouquets_by_florist, unmet = \
-         #   shop.run_month_production(orders)
-        #print("\nFINANCIAL OVERVIEW")
-        #print("-" * 50)
-
-        #print(f"{' ' * 4}Cash Balance (Month Start) : £{shop.cash_balance:.2f}")
-        #print(f"{' ' * 4}Income                     : £{income:.2f}\n")
         
-        #employee_cost = shop.monthly_employee_cost()
-        #greenhouse_cost = shop.monthly_greenhouse_cost()
-        #rent = shop.RENT
-
-        #print(f"{' ' * 4}Outgoings:")
-        #print(f"{' ' * 8}Employee Costs   : £{employee_cost:.2f}")
-        #print(f"{' ' * 8}Greenhouse Costs : £{greenhouse_cost:.2f}")
-        #print(f"{' ' * 8}Rent             : £{rent:.2f}")
-        
-        # Depreciation (ceil-loss + integer stock)
-        #shop.apply_depreciation()
-
-        #print("\nCURRENT SHOP STATUS")
-        #print("-" * 50)
-
-        # ✅ Staff remains printed as a LIST (as you requested)
-        #print(f"{' ' * 4}Current Staff:")
-        #print(f"{' ' * 8}{print_staff_list(shop.florists)}")
-
-        #print(f"\n{' ' * 4}Greenhouse Quantity:")
-        #for k, v in shop.inventory.items():
-         #   print(f"{' ' * 8}{k.capitalize():<10} : {v:.1f}")
         print("-" * 60)
         print("\nMonth in progress...\n")
         print("-" * 60)
@@ -147,38 +114,8 @@ def main():
         for k, v in shop.inventory.items():
             print(f"{' ' * 8}{k.capitalize():<10}: {v:.1f}")
 
-        #print("=" * 50)
+        
 
-       # print("---------------------------------------------------------")
-       #  print("\nMonth in progress...\n")
-
-        # Speciality & labour engine
-        #income, revenue_by_florist, bouquets_by_florist, unmet = \
-        #    shop.run_month_production(orders)
-
-        #print("---------------------------------------------------------\n")
-        #print("End of month calculations:\n")
-        #print(f"Cash Balance, Month Start: £{shop.cash_balance:.2f}")
-        #print(f"{' '*4}Income: £{income:.2f}")
-
-        #employee_cost = shop.monthly_employee_cost()
-        #greenhouse_cost = shop.monthly_greenhouse_cost()
-        #rent = shop.RENT
-
-        #print(f"{' '*4}Outgoings:")
-        #print(f"{' '*8}Employee costs: £{employee_cost:.2f}")
-        #print(f"{' '*8}Greenhouse costs: £{greenhouse_cost:.2f}")
-        #print(f"{' '*8}Rent: £{rent:.2f}\n")
-
-        # Depreciation (ceil-loss + integer stock)
-        #shop.apply_depreciation()
-
-        #print("Current shop status:\n")
-        #print(f"{' '*4}Current staff:\n{' '*8}{print_staff_list(shop.florists)}\n")
-        #print(f"{' '*4}Greenhouse quantity:")
-        #for k, v in shop.inventory.items():
-         #   print(f"{' '*8}{k.capitalize()}: {v:.1f}")
-        #print()
 
         # Restock for greenhouse
         print("The greenhouse has spare capacity and needs to be restocked...\n")
@@ -205,8 +142,7 @@ def main():
                         print(f"{' ' * 8}Daisies  : £1.20")
                         print(f"{' ' * 8}Greenery : £1.80\n")
 
-                       # print("\nEvergreen Essentials -> roses £2.80 / daisies £1.50 / greenery £0.95")
-                       # print("FloraGrow Distributors -> roses £1.60 / daisies £1.20 / greenery £1.80\n")
+                      
                         continue
                     if inp not in ("0", "1"):
                         print("Invalid option.")
@@ -228,9 +164,7 @@ def main():
             print(f"{' ' * 4}{name.capitalize():<12} :")
             print(f"{' ' * 8}Total Revenue = £{rev:.2f}")
 
-        #print("\nFlorist revenue contribution this month:")
-        #for name, rev in revenue_by_florist.items():
-         #   print(f"      {name}: £{rev:.2f}")
+      
 
         # Show bouquet production perfor each florist
         print("\nBouquets Made By Each Florist:")
@@ -242,14 +176,7 @@ def main():
                 qty = breakdown.get(bouquet_name, 0)
                 print(f"{' ' * 8}{bouquet_name:<28} : {qty}")
 
-       # print("\nBouquets made by each florist:")
-        #for name, breakdown in bouquets_by_florist.items():
-        #    parts = [f"{b}= {c}" for b, c in breakdown.items() if c > 0]
-         #   if parts:
-          #      print(f"      {name}: " + ", ".join(parts))
-           # else:
-            #    print(f"      {name}: 0 bouquets")
-         
+       
         print()
         print(f"\n{' '*4}End of month Cash Balance: £{shop.cash_balance:.2f}")
         print("\n=========================================================\n")
