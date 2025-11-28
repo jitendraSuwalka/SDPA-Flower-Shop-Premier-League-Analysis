@@ -32,7 +32,7 @@ def main():
         months_input = input("How many months would you like to run the game for? (Default 6): ").strip()
 
         if months_input == "":
-            print("Warning: You must enter a whole number from 1 to 6 (inclusive).")
+            print("No input received. You must enter a whole number from 1 to 6 (inclusive).")
             continue
 
         try:
@@ -40,7 +40,7 @@ def main():
             if 1 <= total_months <= 6:
                 break
             else:
-                print("Invalid input. Please enter a whole number from 1 to 6 (inclusive).")
+                print("Please enter a whole number from 1 to 6 (inclusive).")
         except ValueError:
             print("Invalid input. Please enter a whole number from 1 to 6 (inclusive).")
 
@@ -162,7 +162,7 @@ def main():
 
         for name, rev in revenue_by_florist.items():
             print(f"{' ' * 4}{name.capitalize():<12} :")
-            print(f"{' ' * 8}Total Revenue = £{rev:.2f}")
+            print(f"{' ' * 8} Revenue earned = £{rev:.2f}")
 
       
 
