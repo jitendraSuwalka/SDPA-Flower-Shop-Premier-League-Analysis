@@ -32,7 +32,7 @@ def main():
         months_input = input("How many months would you like to run the game for? (Default 6): ").strip()
 
         if months_input == "":
-            print("⚠️  Warning: You must enter a number between 1 and 6.")
+            print("Warning: You must enter a whole number from 1 to 6 (inclusive).")
             continue
 
         try:
@@ -40,9 +40,9 @@ def main():
             if 1 <= total_months <= 6:
                 break
             else:
-                print("Please enter a number between 1 and 6.")
+                print("Invalid input. Please enter a whole number from 1 to 6 (inclusive).")
         except ValueError:
-            print("Please enter a valid whole number.")
+            print("Invalid input. Please enter a whole number from 1 to 6 (inclusive).")
 
     bankrupt = False
 
