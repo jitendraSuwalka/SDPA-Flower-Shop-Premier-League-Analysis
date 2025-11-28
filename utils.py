@@ -23,7 +23,7 @@ def yes_no(prompt):
         ans = input(prompt).strip().lower()
         if ans in ("y", "n"):
             return ans
-        print("Please enter y or n.")
+        print("Invalid input. Please enter 'y' for yes or 'n' for no.")
 
 
 def safe_int(prompt, minimum=None, maximum=None, default=None):
