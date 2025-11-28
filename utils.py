@@ -1,9 +1,12 @@
 # utils.py
 # Author: Jitendra Suwalka
-# Section: Data Science Course: SDPA_EMATM0048
-# Description: Small helper functions for robust user input handling.
+# Course: SDPA_EMATM0048
+# Section: Data Science 
+# Description: 
+# # This module contains small helper functions that are used throughout
+# the program to safely and consistently handle user input.
 
-def yes_no(prompt):
+def get_yes_no_input(prompt):
     """
     Prompt the user for a yes/no decision.
 
@@ -18,7 +21,7 @@ def yes_no(prompt):
         str
             Either 'y' or 'n', depending on the user's choice.
     """
-    """Return 'y' or 'n' only; keep asking until valid."""
+    
     while True:
         ans = input(prompt).strip().lower()
         if ans in ("y", "n"):
@@ -26,7 +29,7 @@ def yes_no(prompt):
         print("Invalid input. Please enter 'y' for yes or 'n' for no.")
 
 
-def safe_int(prompt, minimum=None, maximum=None, default=None):
+def get_valid_integer(prompt, minimum=None, maximum=None, default=None):
     """
     Ask for an integer repeatedly until a valid value is entered.
 
@@ -66,7 +69,7 @@ def safe_int(prompt, minimum=None, maximum=None, default=None):
         return val
 
 
-def safe_name(prompt):
+def get_valid_name(prompt):
     """
     Ask for a florist name and apply simple validation rules.
 
@@ -82,7 +85,7 @@ def safe_name(prompt):
             A validated, non-empty name containing letters (and
             possibly spaces) only.
     """
-    """Ask for a florist name (simple validation: non-empty, no digits)."""
+    
     while True:
         name = input(prompt).strip()
         if not name:

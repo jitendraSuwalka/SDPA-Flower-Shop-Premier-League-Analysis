@@ -5,7 +5,7 @@
 #              in the simulation.
 
 from florist import Florist
-from utils import safe_name, safe_int, yes_no
+from utils import get_valid_name, get_valid_integer, get_yes_no_input
 
 MAX_FLORISTS = 4
 
@@ -51,7 +51,7 @@ def hire_interactive(existing_staff):
     if slots <= 0:
         return []
 
-    to_hire = safe_int(
+    to_hire = get_valid_integer(
         f"\nHow many florists would you like to hire? ({slots} slots available): ",
         minimum=0,
         maximum=slots,
@@ -61,7 +61,7 @@ def hire_interactive(existing_staff):
     if len(existing_staff) == 0:
         while to_hire == 0:
             print("You must hire at least one florist.")
-            to_hire = safe_int(
+            to_hire = get_valid_integer(
                 f"How many florists would you like to hire? ({slots} slots available): ",
                 minimum=1,
                 maximum=slots,
@@ -76,7 +76,7 @@ def hire_interactive(existing_staff):
 
         # Prevent duplicate florist names (case-insensitive)
         while True:
-            name = safe_name("Please input florist name (one at a time): ")
+            name = get_valid_name("Please input florist name (one at a time): ")
             name_key = name.lower()
 
             if name_key in existing_names or name_key in new_names:
@@ -87,12 +87,12 @@ def hire_interactive(existing_staff):
         new_names.add(name_key)
 
         spec = None
-        if yes_no("Does this florist have a speciality ? (y/n): ") == "y":
+        if get_yes_no_input("Does this florist have a speciality ? (y/n): ") == "y":
             print("\nChoose speciality:")
             print("0 - Fern-tastic")
             print("1 - Be-Leaf in Yourself")
             print("2 - You Rose to the Occasion")
-            ch = safe_int("Enter choice (0/1/2): ", minimum=0, maximum=2)
+            ch = get_valid_integer("Enter choice (0/1/2): ", minimum=0, maximum=2)
             spec_map = {
                 0: "Fern-tastic",
                 1: "Be-Leaf in Yourself",
@@ -128,7 +128,7 @@ def remove_interactive(staff):
     if not staff:
         return removed
 
-    if yes_no("\nWould you like to remove any florists? (y/n): ") != "y":
+    if get_yes_no_input("\nWould you like to remove any florists? (y/n): ") != "y":
         return removed
 
     if len(staff) <= 1:
@@ -139,7 +139,7 @@ def remove_interactive(staff):
     print(f"You can remove up to {max_removable} florists (at least one must remain).")
 
     # Ask how many to remove
-    num_remove = safe_int(
+    num_remove = get_valid_integer(
         f"How many florists would you like to remove? (1–{max_removable}): ",
         minimum=1,
         maximum=max_removable,
