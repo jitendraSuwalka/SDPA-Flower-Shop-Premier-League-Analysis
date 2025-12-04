@@ -3,15 +3,15 @@
 # Course: SDPA_EMATM0048
 # Section: Data Science 
 # Description: 
-# # This module contains small helper functions that are used throughout
-# the program to safely and consistently handle user input.
+# This module contains small helper functions that are used throughout
+# the program to safely and consistently handle user inputs.
 
 def get_yes_no_input(prompt):
     """
     Prompt the user for a yes/no decision.
 
-    The function only accepts 'y' or 'n' (lowercase) and will keep
-    asking until a valid answer is provided.
+    The function only accepts 'y' or 'n' (lowercase) and and will 
+    continue to ask for input until it receives one of these two choices.
 
     Args:
         prompt::str
@@ -31,26 +31,28 @@ def get_yes_no_input(prompt):
 
 def get_valid_integer(prompt, minimum=None, maximum=None, default=None):
     """
-    Ask for an integer repeatedly until a valid value is entered.
+    Repeatedly ask the user for an integer until a valid number is given.
 
     Args:
         prompt::str
             Text displayed to the user.
         minimum::int | None
-            Optional lower bound. If provided, values below this are
-            rejected with an explanatory message.
+            The lowest number that can be entered. Any number entered that
+              is less than this will have an error message displayed and 
+              the user will be asked to enter a number again.
         maximum::int | None
-            Optional upper bound. If provided, values above this are
-            rejected with an explanatory message.
+            The highest number that can be entered. Any number entered that
+              is greater than this will have an error message displayed and
+                the user will be asked to enter a number again.
         default::int | None
-            If not None and the user just presses Enter, this value is
-            returned instead of asking again.
+            If the user simply enters an Enter key without entering a number,
+              then this will be displayed as if it was entered.
 
     Returns:
         int
-            A validated integer supplied by the user (or the default).
+            A validated integer that was entered by the user (or the default).
     """
-    # Original implementation kept; only documentation added.
+    
     while True:
         raw = input(prompt).strip()
         if raw == "" and default is not None:
@@ -71,19 +73,18 @@ def get_valid_integer(prompt, minimum=None, maximum=None, default=None):
 
 def get_valid_name(prompt):
     """
-    Ask for a florist name and apply simple validation rules.
+    Ask for a florist name and then validate it
 
-    The input may not be empty and may not contain digits. This keeps
-    staff names readable in reports.
+    The input may not be empty and may not include numbers. This is
+    done to help ensure that employee names are readable in reports.
 
     Args:
         prompt::str
-            Text used when asking for the name.
+            The text that you will use when asking the user for their name.
 
     Returns:
         str
-            A validated, non-empty name containing letters (and
-            possibly spaces) only.
+            A validated, non-empty name that includes only letters and/or spaces.
     """
     
     while True:

@@ -1,23 +1,26 @@
 # main.py
 # Author: Jitendra Suwalka
 # Section: Data Science Course: SDPA_EMATM0048
-# Description: Command-line entry point that runs the interactive
-#              flower shop simulation for a chosen number of months.
+# Description: Commmand line interface for th euser to interact with the
+#              flower shop simulator for a specified number of months.
 
 from flowershop import FlowerShop
 from staff import print_staff_list, hire_interactive, remove_interactive
 from orders import collect_orders, check_supplies_for_order
 from inventory import restock_to_capacity
-from utils import yes_no
+from utils import get_yes_no_input
 
 
 def main():
     """
-    Run the full FlowerShop simulation.
+    Run a complete FlowerShop simulation.
 
-    The player chooses how many months to simulate, hires or removes
-    florists, chooses bouquet orders, restocks the greenhouse and
-    observes how the cash balance changes over time.
+    The user determines how many months they wish to run the simulation for,
+    hire or remove florists at the start of a month, choose the types of
+    bouquet orders to be placed by customers in the upcoming month, and observe
+    how the cash balance evolves over time as florists are hired and fired and
+    the number of bouquets sold and bought fluctuates.
+
     """
     shop = FlowerShop()
     print()
@@ -27,10 +30,11 @@ def main():
     print()
     print("==============================================\n")
 
-    # ❗ FIXED: Now EMPTY input shows warning instead of auto-starting Month 1
+    #Dafault number of months for the simulation is 6
     while True:
         months_input = input("How many months would you like to run the game for? (Default 6): ").strip()
 
+        # Display an appropriate message to user if no input received
         if months_input == "":
             print("No input received. You must enter a whole number from 1 to 6 (inclusive).")
             continue
@@ -54,26 +58,27 @@ def main():
         print(f"Current number of florists: {len(shop.florists)}")
         print(f"Current staff: {print_staff_list(shop.florists)}")
 
-        # Hire
+        # Hire a florist (starting of each month only)
         newly_hired = hire_interactive(shop.florists)
         if newly_hired:
             shop.hire_florists(newly_hired)
 
-        # Remove florists (start of month only)
+        # Remove a florist (starting of each month only)
         remove_interactive(shop.florists)
 
         print(f"\nCurrent staff: \n{' '*4}{print_staff_list(shop.florists)}\n")
 
-        # Ask the player how many bouquets of each type they want to sell this month
+        # Ask the player how many bouquets of each type to make/sell for the current month
         print("How much of each bouquet would you like to sell?")
 
         max_vals = [175, 100, 250]
         orders = collect_orders(FlowerShop.BOUQUET_TYPES, max_vals)
 
-        # Check supplies
+        # Review inventory for any order 
         ok, reason = check_supplies_for_order(
             orders, FlowerShop.SUPPLY_USAGE, shop.inventory
         )
+        # If not enough supplies present as per user order, displays in a message
         if not ok:
             print("This exceeds the available supplies. You must try again.")
             orders = collect_orders(FlowerShop.BOUQUET_TYPES, max_vals)
@@ -83,11 +88,11 @@ def main():
         print("\nMonth in progress...\n")
         print("-" * 60)
         
-         # Speciality & labour engine
+         # Speciality of florists & labour process
         income, revenue_by_florist, bouquets_by_florist, unmet = \
             shop.run_month_production(orders)
 
-         # Improve formatting and alignment of End of month calculations
+         # Display End of month calculations
         print("\nEnd of month calculations:\n")
 
         print(f"{' ' * 2}{'Cash Balance, Month Start':<28}: £{shop.cash_balance:.2f}")
@@ -117,9 +122,9 @@ def main():
         
 
 
-        # Restock for greenhouse
+        # Restocking for greenhouse
         print("The greenhouse has spare capacity and needs to be restocked...\n")
-        if yes_no("Do you want to replenish your stock? (y/n): ") == "y":
+        if get_yes_no_input("Do you want to replenish your stock? (y/n): ") == "y":
             chosen = {}
             for flower in ["roses", "daisies", "greenery"]:
                 while True:
@@ -156,7 +161,7 @@ def main():
 
         shop.cash_balance += income - employee_cost - greenhouse_cost - rent - restock_cost
         
-        # Show florist revenue contribution for this month
+        # Display revenue contribution for the shop by florists for this month
         print("\nFlorist Revenue Contribution This Month:")
         print("-" * 40)
 
@@ -166,7 +171,7 @@ def main():
 
       
 
-        # Show bouquet production perfor each florist
+        # Display Bouquets made by florists for this month
         print("\nBouquets Made By Each Florist:")
         print("-" * 30)
 

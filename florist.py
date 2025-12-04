@@ -2,10 +2,9 @@
 # Author: Jitendra Suwalka
 # Course: SDPA_EMATM0048
 # Section: Data Science
-# Description:
-# This module defines the Florist class, which represents an individual
-# employee working in the flower shop called florist. Each florist may also
-# have a speciality, which helps them produce certain bouquets more efficiently. 
+# Description:This module defines the Florist class, which represents an individual
+#             employee working in the flower shop called florist. Each florist may also
+#             have a speciality, which helps them produce certain bouquets more efficiently. 
 class Florist:
     """
     This class represent a single florist employed by the flower shop.

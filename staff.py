@@ -1,8 +1,8 @@
 # staff.py
 # Author: Jitendra Suwalka
 # Section: Data Science Course: SDPA_EMATM0048
-# Description: Utility functions for hiring, listing and removing florists
-#              in the simulation.
+# Description: Functions to assist with adding (hiring), listing and 
+#              removing (firing) florists from the simulation.
 
 from florist import Florist
 from utils import get_valid_name, get_valid_integer, get_yes_no_input
@@ -12,15 +12,15 @@ MAX_FLORISTS = 4
 
 def print_staff_list(staff):
     """
-    Build a nicely formatted representation of the current staff list.
+    Format and create a nice readable view of the current staff list.
 
     Args:
         staff::list[Florist]
-            List of florist objects currently employed.
+            List of florist objects which are currently employed.
 
     Returns:
         list[str]
-            List of string descriptions, ready to print or display.
+            List of string descriptions of florists, ready for printing or display.
     """
     display = []
     for f in staff:
@@ -30,22 +30,26 @@ def print_staff_list(staff):
 
 def hire_interactive(existing_staff):
     """
-    Interactively hire new florists.
+    Interactively hire new florists,base on the input from user.
 
-    The user chooses how many florists to hire (respecting the maximum
-    staff limit) and then enters each name and optional speciality.
-
-    Duplicate names are NOT allowed (case-insensitive).
+    The user decides how many florists to hire (respecting the maximum hiring
+    limit of staff) and then user enters each name and speciality(optional)
+    for each new hire.
+    
+    Duplicate names are NOT permitted (case-insensitive).
 
     Args:
         existing_staff::list[Florist]
             Florists that are already employed. This list is not
-            modified directly; instead a list of new hires is returned.
+            modified directly; instead a new list is returned, which
+            contains newly hired florists names.
 
     Returns:
         list[Florist]
-            Newly created Florist instances representing the hires
-            made in this interaction. May be empty.
+            A list of newly created Florist objects which represent the new 
+            hires made in this interactive session. The length of the returned
+            list could be zero.
+
     """
     slots = MAX_FLORISTS - len(existing_staff)
     if slots <= 0:
@@ -57,7 +61,7 @@ def hire_interactive(existing_staff):
         maximum=slots,
     )
 
-    # If no staff at all, require at least one florist to be hired
+    # If there is no staff hired at all, it requires at least one florist to be hired
     if len(existing_staff) == 0:
         while to_hire == 0:
             print("You must hire at least one florist.")
@@ -67,14 +71,14 @@ def hire_interactive(existing_staff):
                 maximum=slots,
             )
 
-    # NEW: Track existing names (case-insensitive)
+    # Store existing staff names (case-insensitive)
     existing_names = {f.name.lower() for f in existing_staff}
     new_names = set()
 
     new = []
     for _ in range(to_hire):
 
-        # Prevent duplicate florist names (case-insensitive)
+        # Do not permit duplicate names for florists (case-insensitive)
         while True:
             name = get_valid_name("Please input florist name (one at a time): ")
             name_key = name.lower()
@@ -107,22 +111,22 @@ def hire_interactive(existing_staff):
 
 def remove_interactive(staff):
     """
-    Interactively remove florists at the start of a month.
+    Remove florists at the beginning of the month interactively.
 
     Flow:
-      - Ask the player whether they want to remove any florists.
-      - If yes, compute the maximum removable (len(staff) - 1).
-      - Ask for how many to remove and then for each name in turn.
-      - Never remove the last remaining florist.
+      - Ask if you would like to remove any florists.
+      - If so, calculate the maximum number of florists you can remove (max(len(staff)-1)).
+      - Ask how many you would like to remove and ask for each name in turn.
+      - Never remove the last florist.
 
     Args:
         staff::list[Florist]
-            List of currently employed florists. This list is modified
-            in-place as florists are removed.
+            List of currently employed florists. The list will change
+            in place as florists are removed.
 
     Returns:
         list[str]
-            Names of florists that were successfully removed.
+            List of the names of the florists who were removed.
     """
     removed = []
     if not staff:
@@ -138,7 +142,7 @@ def remove_interactive(staff):
     max_removable = len(staff) - 1
     print(f"You can remove up to {max_removable} florists (at least one must remain).")
 
-    # Ask how many to remove
+    # Ask how many florists to remove
     num_remove = get_valid_integer(
         f"How many florists would you like to remove? (1–{max_removable}): ",
         minimum=1,
@@ -147,17 +151,21 @@ def remove_interactive(staff):
 
     for i in range(num_remove):
         while True:
-            # Stop if only one florist left
+
+            # If only one florist is left, we stop the removal process.
+            # The shop must always have at least one florist.
             if len(staff) <= 1:
                 print("You must keep at least one florist. Cannot remove more.")
                 return removed
-
+            # Prompt the user to enter the name of the florist they wish to remove
             name = input("Enter florist name (one at a time): ").strip()
             if not name:
                 print("Please enter a florist name.")
                 continue
 
             found = False
+
+             # Search in the staff list to find out user entered florist name
             for f in staff:
                 if f.name.lower() == name.lower():
                     staff.remove(f)
@@ -165,11 +173,14 @@ def remove_interactive(staff):
                     print(f"Removed florist {f.name}.")
                     found = True
                     break
+
+            # If no matching florist was found, display an error message to the user
             if not found:
                 print("Florist not found. Please enter a valid name.")
             else:
                 break
 
+    # Display names of florists removed
     if removed:
         print(f"Florists removed: {removed}")
     return removed

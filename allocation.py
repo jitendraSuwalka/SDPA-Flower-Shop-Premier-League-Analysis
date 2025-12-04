@@ -18,8 +18,7 @@ It ONLY splits already-decided bouquet orders across florists, respecting:
 from dataclasses import dataclass, field
 from typing import Dict, List, Tuple
 
-# --- Constants taken from coursework ---
-
+# Different Bouquet types
 BOUQUET_TYPES = ["Fern-tastic", "Be-Leaf in Yourself", "You Rose to the Occasion"]
 
 # Minutes to prepare ONE bouquet of each type
@@ -29,14 +28,15 @@ BOUQUET_TIMES_MIN = {
     "You Rose to the Occasion": 45,
 }
 
-# Selling prices (per bouquet) from the brief
+# Selling prices of different bouquet types
 BOUQUET_PRICES = {
     "Fern-tastic": 18.50,
     "Be-Leaf in Yourself": 17.75,
     "You Rose to the Occasion": 32.50,
 }
 
-MAX_HOURS_PER_MONTH = 80.0  # per florist
+# Max No. of working hours for a florist
+MAX_HOURS_PER_MONTH = 80.0  
 
 
 @dataclass
